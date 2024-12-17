@@ -1,12 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import Body from "./components/Body";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h2 className='font-bold text-2xl '>Namaste, Lets Build Netflix GPT Application</h2>
-      </header>
+    <div>
+      <Body />
     </div>
   );
 }
