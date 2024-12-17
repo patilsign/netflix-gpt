@@ -1,11 +1,26 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { checkFieldValidation } from "../utils/validate";
 
 const Login = () => {
+  const [errorMessage, setErrorMessage] = useState();
   const [isLoginForm, setIsLoginForm] = useState(true);
+
+  const name = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
+
   const handleSignIn = () => {
     setIsLoginForm(!isLoginForm);
   };
+  const handleSignBtn = () => {
+    const message = checkFieldValidation(
+      email.current.value,
+      password.current.value
+    );
+    setErrorMessage(message);
+  };
+
   return (
     <div>
       <Header />
@@ -16,22 +31,35 @@ const Login = () => {
           alt="logo"
         ></img>
       </div>
-      <form className="w-full md:w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 rounded-lg bg-opacity-80 text-white">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="w-full md:w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 rounded-lg bg-opacity-80 text-white"
+      >
         <h1 className="p-4 my-4 w-full font-bold text-2xl text-center">
           {isLoginForm ? "Sign In" : "Sign Up"}
         </h1>
-        {!isLoginForm && <input
-          className="p-4 my-4 w-full"
-          type="text"
-          placeholder="Full Name"
-        />}
+        {!isLoginForm && (
+          <input
+            ref={name}
+            className="p-4 my-4 w-full text-black"
+            type="text"
+            placeholder="Full Name"
+          />
+        )}
         <input
-          className="p-4 my-4 w-full"
+          ref={email}
+          className="p-4 my-4 w-full  text-black"
           type="text"
           placeholder="Enter Email"
         />
-        <input className="p-4 my-4 w-full" type="text" placeholder="Password" />
-        <button className="p-4 my-4 w-full bg-red-700">
+        <input
+          ref={password}
+          className="p-4 my-4 w-full  text-black"
+          type="text"
+          placeholder="Password"
+        />
+        <p className="py-4 text-red-500 font-bold">{errorMessage}</p>
+        <button className="p-4 my-4 w-full bg-red-700" onClick={handleSignBtn}>
           {isLoginForm ? "Sign In" : "Sign Up"}
         </button>
         <p className="p-4 my-6 w-full cursor-pointer" onClick={handleSignIn}>
