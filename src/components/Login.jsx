@@ -1,7 +1,11 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkFieldValidation } from "../utils/validate";
-
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState();
   const [isLoginForm, setIsLoginForm] = useState(true);
@@ -19,6 +23,39 @@ const Login = () => {
       password.current.value
     );
     setErrorMessage(message);
+    if (message) return;
+
+    if (!isLoginForm) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user, "user registered successfully");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + ":" + errorMessage);
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user, "user logged in successfully");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + ":" + errorMessage);
+        });
+    }
   };
 
   return (
