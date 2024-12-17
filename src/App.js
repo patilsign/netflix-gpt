@@ -5,8 +5,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Namaste, Lets Build Netflix GPT Application</h2>
+        <h2 className='font-bold text-2xl '>Namaste, Lets Build Netflix GPT Application</h2>
       </header>
     </div>
   );
