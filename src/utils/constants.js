@@ -5,3 +5,18 @@ export const LOGO_URL =
   "https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png";
 
 export const AVTAR_URL = "https://avatars.githubusercontent.com/u/51151974?v=4";
+
+export const TMDB_ACCESS_TOKEN =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4Yzg1YWMxMTk0NWVmODg2MTg5OTY1ZDBjMmYzNjc0ZSIsIm5iZiI6MTczNDUzMzY5Ny4wMjgsInN1YiI6IjY3NjJlMjQxNTVjZDJkZWM5OGZmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cvkhT-95_uQjv1W8ZyOixFRt5K7zeq2ISgdW6AGj6wY";
+
+export const TMDB_API_KEY = "8c85ac11945ef886189965d0c2f3674e";
+
+export const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4Yzg1YWMxMTk0NWVmODg2MTg5OTY1ZDBjMmYzNjc0ZSIsIm5iZiI6MTczNDUzMzY5Ny4wMjgsInN1YiI6IjY3NjJlMjQxNTVjZDJkZWM5OGZmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cvkhT-95_uQjv1W8ZyOixFRt5K7zeq2ISgdW6AGj6wY",
+  },
+};
+
