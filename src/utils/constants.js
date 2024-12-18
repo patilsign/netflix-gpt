@@ -11,7 +11,7 @@ export const TMDB_ACCESS_TOKEN =
 
 export const TMDB_API_KEY = "8c85ac11945ef886189965d0c2f3674e";
 
-export const options = {
+export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
