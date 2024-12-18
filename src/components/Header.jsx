@@ -1,13 +1,51 @@
+import { signOut } from "firebase/auth";
 import React from "react";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser } from "../utils/store/userSlice";
+import { LOGO_URL } from "../utils/constants";
 
 const Header = () => {
+  const user = useSelector((store) => store.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleSignout = () => {
+    signOut(auth)
+      .then(() => {
+        dispatch(removeUser());
+        navigate("/");
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+  
   return (
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
-      <img
-        className="w-44 mx-auto md:mx-0"
-        src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-        alt="logo"
-      />
+      <div>
+        <img
+          className="w-44 mx-auto md:mx-0"
+          src={LOGO_URL}
+          alt="logo"
+        />
+      </div>
+      {user && (
+        <div className="flex">
+          <img
+            className="w-12 h-12 m-4 items-center"
+            alt="usericon"
+            src={user?.photoURL}
+          ></img>
+          <button
+            className="text-white text-xl font-bold p-4"
+            onClick={handleSignout}
+          >
+            Signout
+          </button>
+        </div>
+      )}
     </div>
   );
 };

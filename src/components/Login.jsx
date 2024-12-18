@@ -4,25 +4,35 @@ import { checkFieldValidation } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-const Login = () => {
-  const [errorMessage, setErrorMessage] = useState();
-  const [isLoginForm, setIsLoginForm] = useState(true);
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addUser } from "../utils/store/userSlice";
+import { AVTAR_URL, BODY_BG_IMG_URL } from "../utils/constants";
 
+const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
+  const [errorMessage, setErrorMessage] = useState();
+  const [isLoginForm, setIsLoginForm] = useState(true);
+
   const handleSignIn = () => {
     setIsLoginForm(!isLoginForm);
   };
+
   const handleSignBtn = () => {
     const message = checkFieldValidation(
       email.current.value,
       password.current.value
     );
     setErrorMessage(message);
+    
     if (message) return;
 
     if (!isLoginForm) {
@@ -32,8 +42,25 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          const user = userCredential.user;
-          console.log(user, "user registered successfully");
+          updateProfile(auth.currentUser, {
+            displayName: name.current.value,
+            photoURL: AVTAR_URL,
+          })
+            .then(() => {
+              const { displayName, email, uid, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  displayName: displayName,
+                  email: email,
+                  uid: uid,
+                  photoURL: photoURL,
+                })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setErrorMessage(error.message);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -47,8 +74,7 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          const user = userCredential.user;
-          console.log(user, "user logged in successfully");
+          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -64,7 +90,7 @@ const Login = () => {
       <div className="absolute">
         <img
           className="w-full object-cover"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/729ce5c2-d831-436a-8c9d-f38fea0b99b3/web/IN-en-20241209-TRIFECTA-perspective_4aef76eb-7d5b-4be0-93c0-5f67320fd878_large.jpg"
+          src={BODY_BG_IMG_URL}
           alt="logo"
         ></img>
       </div>
