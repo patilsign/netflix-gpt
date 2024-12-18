@@ -56,7 +56,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -74,7 +73,6 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
