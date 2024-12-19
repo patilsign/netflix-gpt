@@ -6,6 +6,8 @@ export const LOGO_URL =
 
 export const AVTAR_URL = "https://avatars.githubusercontent.com/u/51151974?v=4";
 
+export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
+
 export const TMDB_ACCESS_TOKEN =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4Yzg1YWMxMTk0NWVmODg2MTg5OTY1ZDBjMmYzNjc0ZSIsIm5iZiI6MTczNDUzMzY5Ny4wMjgsInN1YiI6IjY3NjJlMjQxNTVjZDJkZWM5OGZmZTVlNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cvkhT-95_uQjv1W8ZyOixFRt5K7zeq2ISgdW6AGj6wY";
 
