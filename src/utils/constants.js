@@ -22,3 +22,17 @@ export const API_OPTIONS = {
   },
 };
 
+export const SUPPORTED_LANGUAGE = [
+  {
+    identifier: "en",
+    name: "ENGLISH",
+  },
+  {
+    identifier: "hindi",
+    name: "HINDI",
+  },
+  {
+    identifier: "spanish",
+    name: "SPANISH",
+  },
+];
